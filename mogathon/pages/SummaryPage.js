@@ -17,9 +17,11 @@ import {
 export default function SummaryPage({ route, navigation }) {
     return (
         <TouchableOpacity style={styles.testing} >
-            <Text>
-                Summary Page
-            </Text>
+			<ScrollView style={styles.scrollView}>
+            	<Text>
+                	Summary Page
+            	</Text>
+			</ScrollView>
         </TouchableOpacity>
     )
 }
@@ -28,5 +30,12 @@ const styles = StyleSheet.create({
     testing: {
         width: '100%',
         height: '100%'
-    }
+    },
+	scrollView: {
+		backGroundColor: 'white',
+		marginHorizontal: 20
+	},
+	text: {
+		fontSize:18
+	}
 });
