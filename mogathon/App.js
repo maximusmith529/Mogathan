@@ -10,7 +10,8 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen
+          	  <Text>Brian wrote this message, hope it shows up!</Text>
+      <Stack.Screen
                     name="Home"
                     component={HomePage}
                     options={{
