@@ -14,22 +14,26 @@ import {
     Animated,
 } from 'react-native';
 
-export default function HomePage({ route, navigation }) {
+export default function UploadImage({ route, navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity style={styles.helpContainer} onPress={() => { navigation.navigate('HelpPage') }}>
-                    <Text style={styles.helpText}>?</Text>
+                <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('HomePage') }}>
+                    <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
                 </TouchableOpacity>
             </View>
             <View style={styles.body}>
-                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('UploadImage') }}>
-                    <Text style={styles.buttonText}>Upload Image</Text>
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('UploadImage') }}>
+                        <Text style={styles.buttonText}>Upload Image</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('UploadImage') }}>
+                        <Text style={styles.buttonText}>Next</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <Text style={styles.text}>
-
-            </Text>
         </View>
     )
 }
@@ -50,25 +54,26 @@ const styles = StyleSheet.create({
         height: '15%',
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'flex-end'
+        alignItems: 'flex-start'
     },
-    helpContainer: {
-        paddingRight: 25
+    backBtnContainer: {
+        paddingLeft: 25
     },
-    helpText: {
-        color: 'white',
-        fontWeight: '900',
-        fontSize: 50
+    backBtnImage: {
+        width: 40,
+        height: 40
     },
     body: {
+        display: 'flex',
+        flexDirection: 'row',
         height: '85%',
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-evenly',
         paddingBottom: 75,
     },
     button: {
-        width: '85%',
+        width: '100%',
         padding: 10,
         backgroundColor: '#fff',
         borderRadius: '40',
