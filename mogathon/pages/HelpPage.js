@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: '#e0f2fe'
     },
     header: {
         flexDirection: 'row',
         height: 70,
         width: '100%',
-        justifyContent: 'center',
+        justifyContent: 'left',
         top: "2%",
         alignItems: 'flex-start'
     },
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         fontSize: 50
     },
     body: {
-        height: '85%',
+        height: '95%',
         width: '100%',
         alignItems: 'center',
         justifyContent: 'flex-end',
