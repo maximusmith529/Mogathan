@@ -64,47 +64,6 @@ const SummaryPage = ({ route, navigation }) =>
                     <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
             </View>
-<<<<<<< HEAD
-            <View style={styles.chatContainer}>
-                {messages.map(renderMessage)}
-            </View>
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Type a message"
-                    value={newMessage}
-                    onChangeText={(text) => setNewMessage(text)}
-                />
-                <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
-                    <Text style={styles.sendButtonText}>Send</Text>
-                </TouchableOpacity>
-            </View>
-        </KeyboardAvoidingView>
-    );
-};
-
-export default SummaryPage;
-
-// export default function SummaryPage({ route, navigation }) {
-//     return (
-// 		<view style={styles.container}>
-// 			<View style={styles.header}>
-//                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('UploadImage') }}>
-//                     <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
-//                 </TouchableOpacity>
-//             </View>
-// 			<View style={styles.body}>
-// 				<ScrollView style={styles.scrollView}>
-// 					<Text>
-// 						{summText}
-// 					</Text>
-// 				</ScrollView>
-// 			</View>
-// 		</view>
-//     )
-// }
-
-=======
 			<View style={styles.body}>
 				<ScrollView style={styles.scrollView}>
 					<Text>
@@ -155,10 +114,9 @@ export default SummaryPage;
 					</Pressable>
 				</View>
 			</View>
-		</View>
+		</KeyboardAvoidingView>
     )
 }
->>>>>>> ee838a2ac1d14ebad22d534ed9312f9c681d2247
 
 const styles = StyleSheet.create({
     container: {
@@ -212,7 +170,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 10,
     },
-<<<<<<< HEAD
     sendButton: {
         backgroundColor: '#2196F3',
         borderRadius: 20,
@@ -224,9 +181,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-});
-
-=======
 	scrollView: {
 		backGroundColor: 'white',
 		marginHorizontal: 20
@@ -260,4 +214,3 @@ const styles = StyleSheet.create({
 		color: 'white'
 	}
 });
->>>>>>> ee838a2ac1d14ebad22d534ed9312f9c681d2247
