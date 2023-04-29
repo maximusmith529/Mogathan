@@ -13,14 +13,36 @@ import {
     Dimensions,
     Animated,
 } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function UploadImage({ route, navigation }) {
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        { label: 'English', value: 'english' },
+        { label: 'Spanish', value: 'spanish' },
+        { label: 'Creole', value: 'creole' },
+    ]);
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('HomePage') }}>
                     <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.morgan} onPress={() => { navigation.navigate('HomePage') }}>
+                    <Image style={styles.morganImage} source={require('../assets/logo-black-and-yellow.png')} />
+                </TouchableOpacity>
+                <View style={styles.dropdownContainer}>
+                    <DropDownPicker style={styles.dropdown}
+                        open={open}
+                        value={value}
+                        items={items}
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        setItems={setItems}
+                    />
+                </View>
             </View>
             <View style={styles.body}>
 
@@ -50,20 +72,43 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'grey'
+        backgroundColor: '#e0f2fe'
     },
     header: {
-        height: '10%',
+        flexDirection: 'row',
+        height: 70,
         width: '100%',
-        justifyContent: 'center',
-        alignItems: 'flex-start'
+        alignItems: 'flex-end',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
     },
     backBtnContainer: {
-        paddingLeft: 25
+        width: 50,
+        height: '100%',
+        justifyContent: 'center'
     },
     backBtnImage: {
-        width: 40,
-        height: 40
+        width: 25,
+        height: 25,
+        resizeMode: 'contain'
+    },
+    morgan: {
+        width: 140,
+        height: '100%',
+        justifyContent: 'center',
+    },
+    morganImage: {
+        width: '100%',
+        height: '70%',
+        resizeMode: 'contain'
+    },
+    dropdownContainer: {
+        width: '100%',
+        paddingLeft: 30,
+        justifyContent: 'center'
+    },
+    dropdown: {
+        width: '40%'
     },
     body: {
         display: 'flex',
@@ -78,10 +123,10 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 10,
         backgroundColor: '#fff',
-        borderRadius: '40',
         alignItems: 'center',
+        justifyContent: 'center',
         color: 'white',
-        borderRadius: 15,
+        borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: -2, height: 4 },
         shadowOpacity: 0.2,
@@ -101,6 +146,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        height: '10%'
-    }
+        height: '10%',
+        width: '100%',
+        paddingHorizontal: 20,
+        backgroundColor: '#254f94'
+    },
 });
