@@ -16,17 +16,56 @@ import {
 
 export default function SummaryPage({ route, navigation }) {
     return (
-        <TouchableOpacity style={styles.testing} >
-			<ScrollView style={styles.scrollView}>
-            	<Text>
-                	{summText}
-            	</Text>
-			</ScrollView>
-        </TouchableOpacity>
+		<view style={styles.container}>
+			<View style={styles.header}>
+                <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('UploadImage') }}>
+                    <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
+                </TouchableOpacity>
+            </View>
+			<View style={styles.body}>
+				<ScrollView style={styles.scrollView}>
+					<Text>
+						{summText}
+					</Text>
+				</ScrollView>
+			</View>
+		</view>
     )
 }
 
 const styles = StyleSheet.create({
+	container: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'grey'
+    },
+	header: {
+        height: '10%',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+	backBtnContainer: {
+        paddingLeft: 25
+    },
+	backBtnImage: {
+        width: 40,
+        height: 40
+    },
+	body: {
+        display: 'flex',
+        flexDirection: 'row',
+        height: '80%',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        paddingBottom: 75,
+    },
     testing: {
         width: '100%',
         height: '100%'
