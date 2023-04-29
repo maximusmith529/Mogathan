@@ -29,7 +29,7 @@ export default function UploadImage({ route, navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('UploadImage') }}>
+                    <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('SummaryPage') }}>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableOpacity>
                 </View>
