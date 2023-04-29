@@ -21,16 +21,6 @@ export default function HelpPage({ route, navigation }) {
                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('HomePage') }}>
                     <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
-                <View style={styles.dropdownContainer}>
-                    <DropDownPicker style={styles.dropdown}
-                        open={open}
-                        value={value}
-                        items={items}
-                        setOpen={setOpen}
-                        setValue={setValue}
-                        setItems={setItems}
-                    />
-                </View>
             </View>
 
 			<View style={styles.body}>
