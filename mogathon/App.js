@@ -26,7 +26,7 @@ export default function App() {
       //quality:0.5
   
   })
-   
+  if(result !== null){
   const base64 = await FileSystem.readAsStringAsync(result.assets[0].uri, { encoding: 'base64' });
     console.log(Constants?.manifest?.extra?.apiKey);
     const response  = await fetch('https://vision.googleapis.com/v1/images:annotate?key='+Constants?.manifest?.extra?.visionKey, {
@@ -53,6 +53,7 @@ export default function App() {
     const data = await response.json();
     console.log(data.responses[0].fullTextAnnotation.text)
     return data.responses[0].fullTextAnnotation.text;
+  }
 
   }
   const useGPT = async(prompt) => {
@@ -83,14 +84,14 @@ export default function App() {
     setSummText(data.choices[0].text);
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      let imgText = await fetchVision();
-      console.log("image text is:"+imgText);
-      await useGPT(imgText);
-    }
-    fetchData();
-  },[]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     let imgText = await fetchVision();
+  //     console.log("image text is:"+imgText);
+  //     await useGPT(imgText);
+  //   }
+  //   fetchData();
+  // },[]);
 
     return (
         <NavigationContainer>

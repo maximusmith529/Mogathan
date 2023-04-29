@@ -15,8 +15,9 @@ import {
 } from 'react-native';
 
 export default function SummaryPage({ route, navigation }) {
+    let summ = route.params.summary;
     return (
-		<view style={styles.container}>
+		<View style={styles.container}>
 			<View style={styles.header}>
                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('UploadImage') }}>
                     <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
@@ -25,11 +26,11 @@ export default function SummaryPage({ route, navigation }) {
 			<View style={styles.body}>
 				<ScrollView style={styles.scrollView}>
 					<Text>
-						{summText}
+						{summ}
 					</Text>
 				</ScrollView>
 			</View>
-		</view>
+		</View>
     )
 }
 
