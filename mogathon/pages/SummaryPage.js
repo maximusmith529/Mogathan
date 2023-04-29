@@ -1,46 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useRef, useState, useEffect } from 'react';
-import
-    {
-        StyleSheet,
-        Text,
-        View,
-        ScrollView,
-        Image,
-        TextInput,
-        Pressable,
-        TouchableOpacity,
-        ImageBackground,
-        Dimensions,
-        Animated,
-        KeyboardAvoidingView,
-        Platform,
-    } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    ScrollView,
+    Image,
+    TextInput,
+    Pressable,
+    TouchableOpacity,
+    ImageBackground,
+    Dimensions,
+    Animated,
+    KeyboardAvoidingView,
+    Platform,
+} from 'react-native';
 // SummaryPage.js
 
-const SummaryPage = ({ route, navigation }) =>
-{
+const SummaryPage = ({ route, navigation }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const scrollViewRef = useRef();
+
+    const handleContentSizeChange = () => {
+        scrollViewRef.current.scrollToEnd({ animated: true });
+    };
+
     let summary = route.params?.summary;
-    useEffect(() =>
-    {
-        if (summary)
-        {
+    useEffect(() => {
+        if (summary) {
             setMessages([{ text: summary, sender: 'bot' }]);
         }
     }, [summary]);
 
-    const handleSend = () =>
-    {
-        if (newMessage.trim() !== '')
-        {
+    const handleSend = () => {
+        if (newMessage.trim() !== '') {
             setMessages([...messages, { text: newMessage, sender: 'user' }]);
             setNewMessage('');
         }
     };
-    const renderMessage = (message, index) =>
-    {
+    const renderMessage = (message, index) => {
         const isUser = message.sender === 'user';
         const messageStyle = isUser ? styles.userMessage : styles.botMessage;
         const textStyle = isUser ? styles.userMessageText : styles.botMessageText;
@@ -64,9 +63,14 @@ const SummaryPage = ({ route, navigation }) =>
                     <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
             </View>
-            <View style={styles.chatContainer}>
-                {messages.map(renderMessage)}
-            </View>
+            <ScrollView
+                ref={scrollViewRef}
+                style={styles.scrollView}
+                onContentSizeChange={handleContentSizeChange}>
+                <View style={styles.chatContainer}>
+                    {messages.map(renderMessage)}
+                </View>
+            </ScrollView>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.textInput}
@@ -78,6 +82,7 @@ const SummaryPage = ({ route, navigation }) =>
                     <Text style={styles.sendButtonText}>Send</Text>
                 </TouchableOpacity>
             </View>
+
         </KeyboardAvoidingView>
     );
 };
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 10,
         paddingVertical: 5,
-        
+
     },
     textInput: {
         flex: 1,
