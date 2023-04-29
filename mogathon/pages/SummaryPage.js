@@ -60,50 +60,61 @@ const SummaryPage = ({ route, navigation }) =>
     };
 
     return (
-        <View style ={styles.container}>
-            <KeyboardAvoidingView
-                style={styles.container}
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
-            >
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('HomePage') }}>
-                        <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
-                    </TouchableOpacity>
+        <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 25}
+        >
+            <View style={styles.header}>
+                <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('HomePage') }}>
+                    <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
+                </TouchableOpacity>
+            </View>
+            <ScrollView
+                ref={scrollViewRef}
+                style={styles.scrollView}
+                onContentSizeChange={handleContentSizeChange}>
+                <View style={styles.chatContainer}>
+                    {messages.map(renderMessage)}
                 </View>
-                <View style={styles.body}>
-                    <ScrollView style={styles.scrollView}>
-                        <Text>
-                            {summ}
-                        </Text>
-                    </ScrollView>
-                </View>
-            </KeyboardAvoidingView>
-		
-			<View style={styles.btnCont}>
-				<View style={styles.btns}>
-					<Pressable onPress={() => {alert('Need GPT Simplify function')}} style={styles.btnText}>
-						<Text>
-							Simplify
-						</Text>
-					</Pressable>
+            </ScrollView>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Type a message"
+                    value={newMessage}
+                    onChangeText={(text) => setNewMessage(text)}
+                />
+                <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
+                    <Text style={styles.sendButtonText}>Send</Text>
+                </TouchableOpacity>
+            </View>
 
-					<Pressable onPress={() => {alert('Need GPT Example function')}} style={styles.btnText}>
-						<Text>
-							Example
-						</Text>
-					</Pressable>
+        </KeyboardAvoidingView>
+    );
+};
 
-					<Pressable onPress={() => {alert('Need GPT Continue function')}} style={styles.btnText}>
-						<Text>
-							Continue
-						</Text>
-					</Pressable>
-				</View>
-			</View>
-		</View>
-    )
-}
+export default SummaryPage;
+
+// export default function SummaryPage({ route, navigation }) {
+//     return (
+// 		<view style={styles.container}>
+// 			<View style={styles.header}>
+//                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('UploadImage') }}>
+//                     <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
+//                 </TouchableOpacity>
+//             </View>
+// 			<View style={styles.body}>
+// 				<ScrollView style={styles.scrollView}>
+// 					<Text>
+// 						{summText}
+// 					</Text>
+// 				</ScrollView>
+// 			</View>
+// 		</view>
+//     )
+// }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -168,36 +179,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-	scrollView: {
-		backGroundColor: 'white',
-		marginHorizontal: 20
-	},
-	text: {
-		fontSize:18
-	},
-	touchableOpacity: {
-		position: 'absolute',
-		height: 50,
-		width: 50,
-		alignItems: 'center',
-		justifyContent: 'center',
-		bottom: 30,
-		
-	},
-	btnCont: {
-		position: 'absolute',
-		alignItems: 'center',
-		bottom: 20
-	},
-	btns: {
-		flex: 'row',
-		backgroundColor: '#e0f2fe',
-		width: '90%',
-		justifyContent: 'space-evenly',
-		borderRadius: 40
-	},
-	btnText: {
-		fontSize: 18,
-		color: 'white'
-	}
 });
+
