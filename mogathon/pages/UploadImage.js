@@ -49,7 +49,7 @@ export default function UploadImage({ route, navigation }) {
     const getImageFromLib = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: await ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
+            // allowsEditing: true,
         });
         if (result !== null) {
             const newImage = { source: result.assets[0].uri };
@@ -112,36 +112,36 @@ export default function UploadImage({ route, navigation }) {
             //console.log(data.responses[0].fullTextAnnotation.text)
             fullString = fullString + data.responses[0].fullTextAnnotation.text;
         }
-       return await useGPT(fullString)
+        return await useGPT(fullString)
     }
 
-const useGPT = async(prompt) => {
-    const API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
-    const API_KEY = Constants?.manifest?.extra?.openAiKey
+    const useGPT = async (prompt) => {
+        const API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
+        const API_KEY = Constants?.manifest?.extra?.openAiKey
 
-    console.log(API_KEY);
+        console.log(API_KEY);
 
-    const response = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`
-      },
-      body: JSON.stringify({
-        model:"gpt-4",
-        max_tokens: 128,
-        messages: [{role: "system", content: "You are an assistant to the law firm Morgan & Morgan. Your job is to help describe the user's text prompt in layman's terms. Their prompt will usually include legal documents or terms. If it is a legal document try to summarize as concisely and as short as possible."},
-                {role: "user", content: prompt}],
-        temperature: 1,
-        n: 1,
-        stop: '\n'
-      })
-    });
-  
-    const data = await response.json();
-    console.log(data.choices[0].message.content)
-    return data.choices[0].message.content;
-  }
+        const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+                model: "gpt-4",
+                max_tokens: 128,
+                messages: [{ role: "system", content: "You are an assistant to the law firm Morgan & Morgan. Your job is to help describe the user's text prompt in layman's terms. Their prompt will usually include legal documents or terms. If it is a legal document try to summarize as concisely and as short as possible." },
+                { role: "user", content: prompt }],
+                temperature: 1,
+                n: 1,
+                stop: '\n'
+            })
+        });
+
+        const data = await response.json();
+        console.log(data.choices[0].message.content)
+        return data.choices[0].message.content;
+    }
 
     const handleSelectImage = (index) => {
         setSelectedIndex(index);
@@ -164,7 +164,7 @@ const useGPT = async(prompt) => {
                 </View>
             </View>
             <View style={styles.body}>
-                <View style={{ flex: 1 }}>
+                <View style={images.length === 0 ? { flex: 1, backgroundColor: 'grey' } : { flex: 1 }}>
                     <FlatList
                         data={images}
                         horizontal
@@ -187,21 +187,21 @@ const useGPT = async(prompt) => {
             <View style={styles.footer}>
                 <View>
                     <TouchableOpacity style={styles.button} onPress={() => { getImageFromLib() }}>
-                        <Text style={styles.buttonText}>Upload Image</Text>
+                        <Image style={styles.backBtnImage} source={require('../assets/upload-image-btn.png')} />
                     </TouchableOpacity>
                 </View>
                 <View>
                     <TouchableOpacity style={styles.button} onPress={() => { openCamera() }}>
-                        <Text style={styles.buttonText}>Take a Photo</Text>
+                        <Image style={styles.backBtnImage} source={require('../assets/camera.png')} />
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.button} onPress={async() => {
+                    <TouchableOpacity style={styles.button} onPress={async () => {
                         var hold = await handleNextButton();
-                        console.log("TEXT:"+hold);
-                        navigation.navigate('SummaryPage', {summary:hold});
+                        console.log("TEXT:" + hold);
+                        navigation.navigate('SummaryPage', { summary: hold });
                     }}>
-                        <Text style={styles.buttonText}>Next</Text>
+                        <Image style={styles.backBtnImage} source={require('../assets/foward-btn.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -216,17 +216,18 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
         backgroundColor: '#e0f2fe'
     },
     header: {
         flexDirection: 'row',
-        height: 70,
+        height: '10%',
         width: '100%',
         justifyContent: 'center',
-        top: "2%",
-        alignItems: 'flex-start'
+        alignItems: 'flex-end',
+        bottom: '1%',
+        // backgroundColor: 'black'
     },
     backBtnContainer: {
         // justifyContent: 'center'
@@ -265,7 +266,6 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         padding: 10,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         color: 'white',
