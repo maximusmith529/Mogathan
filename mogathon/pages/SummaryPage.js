@@ -30,6 +30,49 @@ export default function SummaryPage({ route, navigation }) {
 					</Text>
 				</ScrollView>
 			</View>
+			
+			{/* <View style={styles.btnCont}>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Simplify
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Example
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Continue
+					</Text>
+				</TouchableOpacity>
+			</View> */}
+
+			<View style={styles.btnCont}>
+				<View style={styles.btns}>
+					<Pressable onPress={() => {alert('Need GPT Simplify function')}} style={styles.btnText}>
+						<Text>
+							Simplify
+						</Text>
+					</Pressable>
+
+					<Pressable onPress={() => {alert('Need GPT Example function')}} style={styles.btnText}>
+						<Text>
+							Example
+						</Text>
+					</Pressable>
+
+					<Pressable onPress={() => {alert('Need GPT Continue function')}} style={styles.btnText}>
+						<Text>
+							Continue
+						</Text>
+					</Pressable>
+				</View>
+			</View>
 		</View>
     )
 }
@@ -77,5 +120,30 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize:18
+	},
+	touchableOpacity: {
+		position: 'absolute',
+		height: 50,
+		width: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+		bottom: 30,
+		
+	},
+	btnCont: {
+		position: 'absolute',
+		alignItems: 'center',
+		bottom: 20
+	},
+	btns: {
+		flex: 'row',
+		backgroundColor: '#e0f2fe',
+		width: '90%',
+		justifyContent: 'space-evenly',
+		borderRadius: 40
+	},
+	btnText: {
+		fontSize: 18,
+		color: 'white'
 	}
 });
