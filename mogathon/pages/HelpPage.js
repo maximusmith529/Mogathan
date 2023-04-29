@@ -18,10 +18,20 @@ export default function HelpPage({ route, navigation }) {
     return (
         <View style={styles.container}>
 			<View style={styles.header}>
-				<Text>
-					Help Page
-				</Text>
-			</View>
+                <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('HomePage') }}>
+                    <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
+                </TouchableOpacity>
+                <View style={styles.dropdownContainer}>
+                    <DropDownPicker style={styles.dropdown}
+                        open={open}
+                        value={value}
+                        items={items}
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        setItems={setItems}
+                    />
+                </View>
+            </View>
 
 			<View style={styles.body}>
 				<ScrollView style={styles.scrollView}>
@@ -70,13 +80,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     header: {
-        backgroundColor: 'black',
-        height: '15%',
+        flexDirection: 'row',
+        height: 70,
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'flex-end',
-		fontSize: 30,
-		alignItems: 'center'
+        top: "2%",
+        alignItems: 'flex-start'
     },
     helpContainer: {
         paddingRight: 25
