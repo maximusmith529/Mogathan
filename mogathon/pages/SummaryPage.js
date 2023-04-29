@@ -63,6 +63,7 @@ const SummaryPage = ({ route, navigation }) => {
                     <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
             </View>
+<<<<<<< HEAD
             <ScrollView
                 ref={scrollViewRef}
                 style={styles.scrollView}
@@ -86,28 +87,61 @@ const SummaryPage = ({ route, navigation }) => {
         </KeyboardAvoidingView>
     );
 };
+=======
+			<View style={styles.body}>
+				<ScrollView style={styles.scrollView}>
+					<Text>
+						{summ}
+					</Text>
+				</ScrollView>
+			</View>
+			
+			{/* <View style={styles.btnCont}>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Simplify
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Example
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Continue
+					</Text>
+				</TouchableOpacity>
+			</View> */}
+>>>>>>> main
 
-export default SummaryPage;
+			<View style={styles.btnCont}>
+				<View style={styles.btns}>
+					<Pressable onPress={() => {alert('Need GPT Simplify function')}} style={styles.btnText}>
+						<Text>
+							Simplify
+						</Text>
+					</Pressable>
 
-// export default function SummaryPage({ route, navigation }) {
-//     return (
-// 		<view style={styles.container}>
-// 			<View style={styles.header}>
-//                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('UploadImage') }}>
-//                     <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
-//                 </TouchableOpacity>
-//             </View>
-// 			<View style={styles.body}>
-// 				<ScrollView style={styles.scrollView}>
-// 					<Text>
-// 						{summText}
-// 					</Text>
-// 				</ScrollView>
-// 			</View>
-// 		</view>
-//     )
-// }
+					<Pressable onPress={() => {alert('Need GPT Example function')}} style={styles.btnText}>
+						<Text>
+							Example
+						</Text>
+					</Pressable>
 
+					<Pressable onPress={() => {alert('Need GPT Continue function')}} style={styles.btnText}>
+						<Text>
+							Continue
+						</Text>
+					</Pressable>
+				</View>
+			</View>
+		</KeyboardAvoidingView>
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -185,5 +219,36 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+	scrollView: {
+		backGroundColor: 'white',
+		marginHorizontal: 20
+	},
+	text: {
+		fontSize:18
+	},
+	touchableOpacity: {
+		position: 'absolute',
+		height: 50,
+		width: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+		bottom: 30,
+		
+	},
+	btnCont: {
+		position: 'absolute',
+		alignItems: 'center',
+		bottom: 20
+	},
+	btns: {
+		flex: 'row',
+		backgroundColor: '#e0f2fe',
+		width: '90%',
+		justifyContent: 'space-evenly',
+		borderRadius: 40
+	},
+	btnText: {
+		fontSize: 18,
+		color: 'white'
+	}
 });
-
