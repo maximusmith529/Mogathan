@@ -31,7 +31,8 @@ export default{
     },
     extra: {
       // Add your extra configs here
-      apiKey: process.env.REACT_NATIVE_VISION_API_KEY
+      visionKey: process.env.REACT_NATIVE_VISION_API_KEY,
+      openAiKey: process.env.REACT_NATIVE_GPT_API_KEY
     }
 
   }

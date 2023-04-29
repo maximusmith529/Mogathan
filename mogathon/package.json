@@ -20,6 +20,7 @@
     "expo-status-bar": "~1.4.4",
     "fs": "^0.0.1-security",
     "nvm": "^0.0.4",
+    "openai": "^3.2.1",
     "react": "18.2.0",
     "react-native": "0.71.7",
     "react-native-dotenv": "^3.4.8",
