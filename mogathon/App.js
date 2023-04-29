@@ -3,8 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
+import { NavigationContainer } from "@react-navigation/native";
 import Constants from 'expo-constants';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomePage from "./pages/HomePage.js";
+import UploadImage from "./pages/UploadImage.js";
+import SummaryPage from "./pages/SummaryPage.js";
+import HelpPage from "./pages/HelpPage.js";
 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 
@@ -85,20 +92,38 @@ export default function App() {
     fetchData();
   },[]);
 
- 
-  return (
-    <View style={styles.container}>
-      <Text>{summText}</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="HomePage"
+                    component={HomePage}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name="UploadImage"
+                    component={UploadImage}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name="SummaryPage"
+                    component={SummaryPage}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name="HelpPage"
+                    component={HelpPage}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
