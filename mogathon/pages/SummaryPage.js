@@ -114,6 +114,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#e0f2fe',
     },
+    header: {
+        flexDirection: 'row',
+        height: '10%',
+        width: '100%',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end',
+    },
+    backBtnContainer: {
+        paddingLeft: 25,
+    },
+    backBtnImage: {
+        width: 50,
+    },
     chatContainer: {
         flex: 1,
         paddingHorizontal: 10,
@@ -162,7 +175,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     sendButton: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#254f94',
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 10,
