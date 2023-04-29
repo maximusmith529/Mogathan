@@ -18,13 +18,16 @@ export default function HomePage({ route, navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
+                <TouchableOpacity style={styles.morgan} onPress={() => { navigation.navigate('HomePage') }}>
+                    <Image style={styles.morganImage} source={require('../assets/logo-black-and-yellow.png')} />
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.helpContainer} onPress={() => { navigation.navigate('HelpPage') }}>
                     <Text style={styles.helpText}>?</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.body}>
                 <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('UploadImage') }}>
-                    <Text style={styles.buttonText}>Upload Image</Text>
+                    <Text style={styles.buttonText}>Upload Images</Text>
                 </TouchableOpacity>
             </View>
             <Text style={styles.text}>
@@ -43,20 +46,32 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'grey'
+        backgroundColor: '#e0f2fe'
     },
     header: {
-        backgroundColor: 'black',
-        height: '15%',
+        flexDirection: 'row',
+        height: 70,
         width: '100%',
+        alignItems: 'flex-end',
+        paddingHorizontal: 20,
+        justifyContent: 'flex-end',
+    },
+    morgan: {
+        width: 140,
+        height: '100%',
         justifyContent: 'center',
-        alignItems: 'flex-end'
+        alignItems: 'center'
+    },
+    morganImage: {
+        width: '100%',
+        height: '70%',
+        resizeMode: 'contain'
     },
     helpContainer: {
-        paddingRight: 25
+        paddingLeft: 90,
     },
     helpText: {
-        color: 'white',
+        color: '#e2d546',
         fontWeight: '900',
         fontSize: 50
     },
@@ -70,7 +85,7 @@ const styles = StyleSheet.create({
     button: {
         width: '85%',
         padding: 10,
-        backgroundColor: '#fff',
+        backgroundColor: '#e2d546',
         borderRadius: '40',
         alignItems: 'center',
         color: 'white',
@@ -83,10 +98,5 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 25,
         fontWeight: 'bold',
-    },
-    text: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: 'red'
     },
 });

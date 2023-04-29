@@ -28,10 +28,7 @@ export default function UploadImage({ route, navigation }) {
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('HomePage') }}>
-                    <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.morgan} onPress={() => { navigation.navigate('HomePage') }}>
-                    <Image style={styles.morganImage} source={require('../assets/logo-black-and-yellow.png')} />
+                    <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
                 <View style={styles.dropdownContainer}>
                     <DropDownPicker style={styles.dropdown}
@@ -78,37 +75,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 70,
         width: '100%',
+        marginTop: 15,
         alignItems: 'flex-end',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         paddingHorizontal: 20,
     },
     backBtnContainer: {
-        width: 50,
-        height: '100%',
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     backBtnImage: {
-        width: 25,
-        height: 25,
-        resizeMode: 'contain'
-    },
-    morgan: {
-        width: 140,
-        height: '100%',
-        justifyContent: 'center',
-    },
-    morganImage: {
-        width: '100%',
-        height: '70%',
-        resizeMode: 'contain'
+        width: 50,
+        // height: 50,
+        // resizeMode: 'contain'
     },
     dropdownContainer: {
-        width: '100%',
-        paddingLeft: 30,
-        justifyContent: 'center'
+        width: '80%',
+        paddingLeft: '40%',
+        justifyContent: 'center',
     },
     dropdown: {
-        width: '40%'
+        width: '100%'
     },
     body: {
         display: 'flex',
