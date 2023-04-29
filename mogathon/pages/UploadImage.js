@@ -35,6 +35,21 @@ export default function UploadImage({ route, navigation }) {
     const { width } = Dimensions.get('window');
     const itemWidth = width;
 
+    const spinAnim = useRef(new Animated.Value(0)).current;
+
+    Animated.loop(
+        Animated.timing(spinAnim, {
+            toValue: 4,
+            duration: 10000,
+            useNativeDriver: true,
+        })
+    ).start();
+
+    const spin = spinAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg'],
+    });
+
     const renderItem = ({ item, index }) => {
         return (
             <View style={{ flex: 1, width: itemWidth }}>
@@ -123,33 +138,40 @@ export default function UploadImage({ route, navigation }) {
 
         console.log(API_KEY);
 
-    const response = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`
-      },
-      body: JSON.stringify({
-        model:"gpt-3.5-turbo",
-        max_tokens: 128,
-        messages: [{role: "system", content: "You are an assistant to the law firm Morgan & Morgan. Your job is to help describe the user's text prompt in layman's terms. Their prompt will usually include legal documents or terms. If it is a legal document try to summarize as concisely and as short as possible."},
-                {role: "user", content: prompt}],
-        temperature: 1,
-        n: 1,
-        stop: '\n'
-      })
-    });
-  
-    const data = await response.json();
-    console.log(data.choices[0].message.content)
-    return data.choices[0].message.content;
-  }
+        const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+                model: "gpt-4",
+                max_tokens: 128,
+                messages: [{ role: "system", content: "You are an assistant to the law firm Morgan & Morgan. Your job is to help describe the user's text prompt in layman's terms. Their prompt will usually include legal documents or terms. If it is a legal document try to summarize as concisely and as short as possible." },
+                { role: "user", content: prompt }],
+                temperature: 1,
+                n: 1,
+                stop: '\n'
+            })
+        });
+
+        const data = await response.json();
+        console.log(data.choices[0].message.content)
+        return data.choices[0].message.content;
+    }
 
     const handleSelectImage = (index) => {
         setSelectedIndex(index);
     };
-    if(nextPressed){
-        return ( <View style={styles.container}><Text>Loading...</Text></View>);
+    if (nextPressed) {
+        return (
+            <View style={styles.container}>
+                <Animated.Image
+                    style={[styles.loadingImg, { transform: [{ rotate: spin }] }]}
+                    source={require('../assets/loading-icon.png')}
+                />
+            </View>
+        );
     }
     return (
         <View style={styles.container}>
@@ -203,9 +225,9 @@ export default function UploadImage({ route, navigation }) {
                 <View>
                     <TouchableOpacity style={styles.button} onPress={async () => {
                         var hold = await handleNextButton();
-                        console.log("TEXT:"+hold);
+                        console.log("TEXT:" + hold);
                         setNextPressed(false);
-                        navigation.navigate('SummaryPage', {summary:hold});
+                        navigation.navigate('SummaryPage', { summary: hold });
                     }}>
                         <Image style={styles.backBtnImage} source={require('../assets/foward-btn.png')} />
                     </TouchableOpacity>
@@ -300,4 +322,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         backgroundColor: '#254f94'
     },
+    loadingImg: {
+        alignSelf: 'center',
+        width: 100,
+        height: 100,
+        marginBottom: 20
+    }
 });
