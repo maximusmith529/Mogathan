@@ -64,6 +64,7 @@ const SummaryPage = ({ route, navigation }) =>
                     <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
             </View>
+<<<<<<< HEAD
             <View style={styles.chatContainer}>
                 {messages.map(renderMessage)}
             </View>
@@ -103,6 +104,61 @@ export default SummaryPage;
 //     )
 // }
 
+=======
+			<View style={styles.body}>
+				<ScrollView style={styles.scrollView}>
+					<Text>
+						{summ}
+					</Text>
+				</ScrollView>
+			</View>
+			
+			{/* <View style={styles.btnCont}>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Simplify
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Example
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.touchableOpacity}
+				onPress={() => {alert('Put GPT command here')}}>
+					<Text styles={styles.btnText}>
+						Continue
+					</Text>
+				</TouchableOpacity>
+			</View> */}
+
+			<View style={styles.btnCont}>
+				<View style={styles.btns}>
+					<Pressable onPress={() => {alert('Need GPT Simplify function')}} style={styles.btnText}>
+						<Text>
+							Simplify
+						</Text>
+					</Pressable>
+
+					<Pressable onPress={() => {alert('Need GPT Example function')}} style={styles.btnText}>
+						<Text>
+							Example
+						</Text>
+					</Pressable>
+
+					<Pressable onPress={() => {alert('Need GPT Continue function')}} style={styles.btnText}>
+						<Text>
+							Continue
+						</Text>
+					</Pressable>
+				</View>
+			</View>
+		</View>
+    )
+}
+>>>>>>> ee838a2ac1d14ebad22d534ed9312f9c681d2247
 
 const styles = StyleSheet.create({
     container: {
@@ -156,6 +212,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 10,
     },
+<<<<<<< HEAD
     sendButton: {
         backgroundColor: '#2196F3',
         borderRadius: 20,
@@ -169,3 +226,38 @@ const styles = StyleSheet.create({
     },
 });
 
+=======
+	scrollView: {
+		backGroundColor: 'white',
+		marginHorizontal: 20
+	},
+	text: {
+		fontSize:18
+	},
+	touchableOpacity: {
+		position: 'absolute',
+		height: 50,
+		width: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+		bottom: 30,
+		
+	},
+	btnCont: {
+		position: 'absolute',
+		alignItems: 'center',
+		bottom: 20
+	},
+	btns: {
+		flex: 'row',
+		backgroundColor: '#e0f2fe',
+		width: '90%',
+		justifyContent: 'space-evenly',
+		borderRadius: 40
+	},
+	btnText: {
+		fontSize: 18,
+		color: 'white'
+	}
+});
+>>>>>>> ee838a2ac1d14ebad22d534ed9312f9c681d2247
