@@ -19,7 +19,7 @@ export default function SummaryPage({ route, navigation }) {
         <TouchableOpacity style={styles.testing} >
 			<ScrollView style={styles.scrollView}>
             	<Text>
-                	Summary Page
+                	{summText}
             	</Text>
 			</ScrollView>
         </TouchableOpacity>

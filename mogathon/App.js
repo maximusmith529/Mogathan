@@ -80,7 +80,7 @@ export default function App() {
   
     const data = await response.json();
     console.log(data.choices[0].message.content)
-    //setSummText(data.choices[0].text);
+    setSummText(data.choices[0].text);
   }
 
   useEffect(() => {
