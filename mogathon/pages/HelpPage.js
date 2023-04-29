@@ -16,16 +16,28 @@ import {
 
 export default function HelpPage({ route, navigation }) {
     return (
-        <TouchableOpacity style={styles.testing} >
-            <Text>
-                Help Page
-            </Text>
-        </TouchableOpacity>
+        <View style={styles.container}>
+			<View style={styles.header}>
+				<Text>
+					Help Page
+				</Text>
+			</View>
+
+			<View style={styles.body}>
+				<ScrollView style={styles.scrollView}>
+					<Text>
+					What is Morgan & Morgan Mate?
+						Morgan & Morgan Mate is a legal documentation assistant application made to assist 
+						the average person to make sense of complicated and wordy legal documents
+					</Text>
+				</ScrollView>
+			</View>
+	    </View>
     )
 }
 
 const styles = StyleSheet.create({
-    testing: {
+    header: {
         width: '100%',
         height: '100%'
     }
