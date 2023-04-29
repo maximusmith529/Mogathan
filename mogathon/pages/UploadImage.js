@@ -23,6 +23,9 @@ export default function UploadImage({ route, navigation }) {
                 </TouchableOpacity>
             </View>
             <View style={styles.body}>
+
+            </View>
+            <View style={styles.footer}>
                 <View>
                     <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('UploadImage') }}>
                         <Text style={styles.buttonText}>Upload Image</Text>
@@ -50,8 +53,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey'
     },
     header: {
-        backgroundColor: 'black',
-        height: '15%',
+        height: '10%',
         width: '100%',
         justifyContent: 'center',
         alignItems: 'flex-start'
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     body: {
         display: 'flex',
         flexDirection: 'row',
-        height: '85%',
+        height: '80%',
         width: '100%',
         alignItems: 'center',
         justifyContent: 'space-evenly',
@@ -94,4 +96,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'red'
     },
+    footer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        height: '10%'
+    }
 });
