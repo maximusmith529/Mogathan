@@ -13,6 +13,7 @@ import {
     Dimensions,
     Animated,
 } from 'react-native';
+import {summText} from './App.js'
 
 export default function SummaryPage({ route, navigation }) {
     return (
