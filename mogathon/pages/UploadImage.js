@@ -20,6 +20,7 @@ import * as FileSystem from 'expo-file-system';
 import Constants from 'expo-constants';
 
 export default function UploadImage({ route, navigation }) {
+    const [nextPressed, setNextPressed] = useState(false);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -49,7 +50,7 @@ export default function UploadImage({ route, navigation }) {
     const getImageFromLib = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: await ImagePicker.MediaTypeOptions.All,
-            // allowsEditing: true,
+            //allowsEditing: true,
         });
         if (result !== null) {
             const newImage = { source: result.assets[0].uri };
@@ -82,6 +83,7 @@ export default function UploadImage({ route, navigation }) {
         }
     }
     const handleNextButton = async () => {
+        setNextPressed(true);
         let fullString = "";
         console.log(images);
         for (const uri of images) {
@@ -121,31 +123,34 @@ export default function UploadImage({ route, navigation }) {
 
         console.log(API_KEY);
 
-        const response = await fetch(API_ENDPOINT, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${API_KEY}`
-            },
-            body: JSON.stringify({
-                model: "gpt-4",
-                max_tokens: 128,
-                messages: [{ role: "system", content: "You are an assistant to the law firm Morgan & Morgan. Your job is to help describe the user's text prompt in layman's terms. Their prompt will usually include legal documents or terms. If it is a legal document try to summarize as concisely and as short as possible." },
-                { role: "user", content: prompt }],
-                temperature: 1,
-                n: 1,
-                stop: '\n'
-            })
-        });
-
-        const data = await response.json();
-        console.log(data.choices[0].message.content)
-        return data.choices[0].message.content;
-    }
+    const response = await fetch(API_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
+      },
+      body: JSON.stringify({
+        model:"gpt-3.5-turbo",
+        max_tokens: 128,
+        messages: [{role: "system", content: "You are an assistant to the law firm Morgan & Morgan. Your job is to help describe the user's text prompt in layman's terms. Their prompt will usually include legal documents or terms. If it is a legal document try to summarize as concisely and as short as possible."},
+                {role: "user", content: prompt}],
+        temperature: 1,
+        n: 1,
+        stop: '\n'
+      })
+    });
+  
+    const data = await response.json();
+    console.log(data.choices[0].message.content)
+    return data.choices[0].message.content;
+  }
 
     const handleSelectImage = (index) => {
         setSelectedIndex(index);
     };
+    if(nextPressed){
+        return ( <View style={styles.container}><Text>Loading...</Text></View>);
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -198,8 +203,9 @@ export default function UploadImage({ route, navigation }) {
                 <View>
                     <TouchableOpacity style={styles.button} onPress={async () => {
                         var hold = await handleNextButton();
-                        console.log("TEXT:" + hold);
-                        navigation.navigate('SummaryPage', { summary: hold });
+                        console.log("TEXT:"+hold);
+                        setNextPressed(false);
+                        navigation.navigate('SummaryPage', {summary:hold});
                     }}>
                         <Image style={styles.backBtnImage} source={require('../assets/foward-btn.png')} />
                     </TouchableOpacity>
