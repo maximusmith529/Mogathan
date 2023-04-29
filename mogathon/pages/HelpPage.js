@@ -31,7 +31,7 @@ export default function HelpPage({ route, navigation }) {
 					<Text style={styles.answer}>
 						{'\t'} Morgan & Morgan Mate is a legal documentation assistant application 
 						made to assist the average person to make sense of complicated and wordy 
-						legal documents {'\n'}
+						legal documents. {'\n'}
 					</Text>
 					<Text style={styles.question}>
 						{'\n'}How does Morgan & Morgan Mate Work?{'\n'}
@@ -39,13 +39,18 @@ export default function HelpPage({ route, navigation }) {
 					<Text style={styles.answer}>
 						{'\t'} Morgan & Morgan Mate uses the latest developments in cutting edge AI 
 						technologies to read the provided legal document images and produce a well 
-						crafted synopsis and explanation of the contains within said document {'\n'}
+						crafted synopsis and explanation of the contains within said document. {'\n'}
 					</Text>
 					<Text style={styles.question}>
 						{'\n'} How do I use Morgan and Morgan Mate?{'\n'}
 					</Text>
 					<Text style={styles.answer}>
-						{'\t'} 
+						{'\t'} All one has to do to use Morgan and Morgan Mate is either upload 
+						existing images from their device or select the option to take new photos. 
+						Once the desired images are uploaded, the application will produce a synopsis 
+						of the legal documents within the provided images. Users will then have the 
+						ability to get more information about their documents or even ask questions 
+						relating to the contents of the document.{'\n'}
 					</Text>
 				</ScrollView>
 			</View>
