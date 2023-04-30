@@ -27,6 +27,7 @@ export default function UploadImage({ route, navigation }) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [images, setImages] = useState([]);
+    const [imageText, setImageText] = useState('');
 
     const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -128,9 +129,11 @@ export default function UploadImage({ route, navigation }) {
                 })
             });
             const data = await response.json();
+
             //console.log(data.responses[0].fullTextAnnotation.text)
             fullString = fullString + data.responses[0].fullTextAnnotation.text;
         }
+        setImageText(fullString);
         return await useGPT(fullString)
     }
 
@@ -233,7 +236,7 @@ export default function UploadImage({ route, navigation }) {
                         var hold = await handleNextButton();
                         console.log("TEXT:" + hold);
                         setNextPressed(false);
-                        navigation.navigate('SummaryPage', {lang:selectedValue, summary: hold });
+                        navigation.navigate('SummaryPage', {lang:selectedValue, summary: hold, fullTextString: imageText });
                     }}>
                         <Image style={styles.backBtnImage} source={require('../assets/foward-btn.png')} />
                     </TouchableOpacity>
