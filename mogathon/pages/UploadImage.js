@@ -14,7 +14,6 @@ import {
     Animated,
     FlatList
 } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
@@ -22,9 +21,13 @@ import Constants from 'expo-constants';
 
 export default function UploadImage({ route, navigation }) {
     const [nextPressed, setNextPressed] = useState(false);
-    const [selectedValue, setSelectedValue] = useState('English');
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        { label: 'English', value: 'english' },
+        { label: 'Spanish', value: 'spanish' },
+        { label: 'Creole', value: 'creole' },
+    ]);
     const [images, setImages] = useState([]);
 
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -145,7 +148,7 @@ export default function UploadImage({ route, navigation }) {
                 model: "gpt-4",
                 max_tokens: 128,
                 messages: [{ role: "system", content: "You are an assistant to the law firm Morgan & Morgan. Your job is to help describe the user's text prompt in layman's terms. Their prompt will usually include legal documents or terms. If it is a legal document try to summarize as concisely and as short as possible." },
-                { role: "user", content: prompt+". Please respond in the "+selectedValue+" language" },],
+                { role: "user", content: prompt }],
                 temperature: 1,
                 n: 1,
                 stop: '\n'
@@ -177,20 +180,18 @@ export default function UploadImage({ route, navigation }) {
                     <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
                 <View style={styles.dropdownContainer}>
-                    <Picker
-                        selectedValue={selectedValue}
-                        onValueChange={(itemValue, itemIndex) =>
-                            setSelectedValue(itemValue)
-                        }
-                    >
-                        <Picker.Item label="English" value="English" />
-                        <Picker.Item label="Spanish" value="Spanish" />
-                        <Picker.Item label="Creole" value="Haitian Creole" />
-                    </Picker>
+                    <DropDownPicker style={styles.dropdown}
+                        open={open}
+                        value={value}
+                        items={items}
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        setItems={setItems}
+                    />
                 </View>
             </View>
             <View style={styles.body}>
-                <View style={images.length === 0 ? { flex: 1, backgroundColor: '#b5c1d4',  } : { flex: 1 }}>
+                <View style={images.length === 0 ? { flex: 1, backgroundColor: 'grey' } : { flex: 1 }}>
                     <FlatList
                         data={images}
                         horizontal
@@ -226,7 +227,7 @@ export default function UploadImage({ route, navigation }) {
                         var hold = await handleNextButton();
                         console.log("TEXT:" + hold);
                         setNextPressed(false);
-                        navigation.navigate('SummaryPage', {lang:selectedValue, summary: hold });
+                        navigation.navigate('SummaryPage', { summary: hold });
                     }}>
                         <Image style={styles.backBtnImage} source={require('../assets/foward-btn.png')} />
                     </TouchableOpacity>
@@ -266,8 +267,7 @@ const styles = StyleSheet.create({
     },
     dropdownContainer: {
         width: '80%',
-        paddingLeft: '45%',
-        top:"20%",
+        paddingLeft: '40%',
         justifyContent: 'center',
     },
     dropdown: {
