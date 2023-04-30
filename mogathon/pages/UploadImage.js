@@ -20,6 +20,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import Constants from 'expo-constants';
 
+// Processes the sending of images to Google Vision API
 export default function UploadImage({ route, navigation }) {
     const [nextPressed, setNextPressed] = useState(false);
     const [selectedValue, setSelectedValue] = useState('English');
@@ -35,6 +36,7 @@ export default function UploadImage({ route, navigation }) {
 
     const spinAnim = useRef(new Animated.Value(0)).current;
 
+	// Plays loading animation
     Animated.loop(
         Animated.timing(spinAnim, {
             toValue: 4,
@@ -60,6 +62,7 @@ export default function UploadImage({ route, navigation }) {
         );
     };
 
+	// Gets an image from user device
     const getImageFromLib = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: await ImagePicker.MediaTypeOptions.All,
@@ -72,6 +75,7 @@ export default function UploadImage({ route, navigation }) {
         }
     };
 
+	// Asks for permission to then open device's camera for taking images
     const openCamera = async () => {
         // Ask the user for the permission to access the camera
         const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -95,6 +99,7 @@ export default function UploadImage({ route, navigation }) {
             setImages(newImages);
         }
     }
+	// Gives functionality to nect button, navigating forward after uploading images
     const handleNextButton = async () => {
         setNextPressed(true);
         let fullString = "";
@@ -132,6 +137,7 @@ export default function UploadImage({ route, navigation }) {
         return await useGPT(fullString)
     }
 
+	// Prompts GPT with provided text and receives summary of provided document
     const useGPT = async (prompt) => {
         const API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
         const API_KEY = Constants?.manifest?.extra?.openAiKey
@@ -173,6 +179,7 @@ export default function UploadImage({ route, navigation }) {
             </View>
         );
     }
+	// Renders page onto the screen with proper component ordering and styling
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -239,6 +246,7 @@ export default function UploadImage({ route, navigation }) {
     )
 }
 
+// Styling for page components
 const styles = StyleSheet.create({
     container: {
         display: 'flex',

@@ -14,6 +14,7 @@ import {
     Animated,
 } from 'react-native';
 
+// Page allows uploading of image and navigation to further pages
 export default function HomePage({ route, navigation }) {
     return (
         <View style={styles.container}>
@@ -37,6 +38,7 @@ export default function HomePage({ route, navigation }) {
     )
 }
 
+// CSS styling for contents of page
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
