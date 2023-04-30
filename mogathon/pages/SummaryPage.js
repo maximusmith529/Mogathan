@@ -18,6 +18,7 @@ import {
 // SummaryPage.js
 import Constants from 'expo-constants';
 
+// Send text to GPT and receives summary
 const SummaryPage = ({ route, navigation }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
@@ -37,6 +38,7 @@ const SummaryPage = ({ route, navigation }) => {
         }
     }, [summ]);
 
+	// Handles sending of messages from user to GPT
   const handleSend = async() => {
     if (newMessage.trim() !== '') {
       let n = newMessage;
@@ -53,6 +55,7 @@ const SummaryPage = ({ route, navigation }) => {
     }
   };
 
+  // Renders user messages sent to GPT
   const renderMessage = (message, index) =>
     {
         const isUser = message.sender === 'user';
@@ -69,7 +72,7 @@ const SummaryPage = ({ route, navigation }) => {
     };
 
     
-
+	// Prompts GPT to respond to user's prompt
     const GPTPrompt = async (prompt) => {
         const API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
         const API_KEY = Constants?.manifest?.extra?.openAiKey
@@ -98,7 +101,7 @@ const SummaryPage = ({ route, navigation }) => {
         return data.choices[0].message.content;
     }
 
-  
+	// Renders page containing summary and messages in addition to navigatory buttons
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -136,25 +139,7 @@ const SummaryPage = ({ route, navigation }) => {
 
 export default SummaryPage;
 
-// export default function SummaryPage({ route, navigation }) {
-//     return (
-// 		<view style={styles.container}>
-// 			<View style={styles.header}>
-//                 <TouchableOpacity style={styles.backBtnContainer} onPress={() => { navigation.navigate('UploadImage') }}>
-//                     <Image style={styles.backBtnImage} source={require('../assets/back-button.png')} />
-//                 </TouchableOpacity>
-//             </View>
-// 			<View style={styles.body}>
-// 				<ScrollView style={styles.scrollView}>
-// 					<Text>
-// 						{summText}
-// 					</Text>
-// 				</ScrollView>
-// 			</View>
-// 		</view>
-//     )
-// }
-
+// Styling for page components
 const styles = StyleSheet.create({
 	container: {
         display: 'flex',

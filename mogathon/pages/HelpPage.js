@@ -14,6 +14,8 @@ import {
     Animated,
 } from 'react-native';
 
+// Renders page with helpful information about application
+// Prints out helpful info in Question/Answer format
 export default function HelpPage({ route, navigation }) {
     return (
         <View style={styles.container}>
@@ -23,6 +25,7 @@ export default function HelpPage({ route, navigation }) {
                 </TouchableOpacity>
             </View>
 
+			
             <View style={styles.body}>
                 <ScrollView style={styles.scrollView}>
                     <Text style={styles.question}>
@@ -58,6 +61,7 @@ export default function HelpPage({ route, navigation }) {
     )
 }
 
+// Styling for page components, including specific styles for questions and answers
 const styles = StyleSheet.create({
     container: {
         display: 'flex',

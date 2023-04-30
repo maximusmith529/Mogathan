@@ -13,10 +13,12 @@ import HelpPage from "./pages/HelpPage.js";
 
 const Stack = createNativeStackNavigator();
 
+// Driving file behind app functionality
 export default function App() {
 
   const [summText, setSummText] = useState("");
 
+  // Uses Google Vision API to get text from image
   const fetchVision = async () => {
 
     let result = await  ImagePicker.launchImageLibraryAsync({
@@ -56,6 +58,7 @@ export default function App() {
   }
 
   }
+  // Uses GPT 4 API to get synopsis
   const useGPT = async(prompt) => {
     const API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
     const API_KEY = Constants?.manifest?.extra?.openAiKey
@@ -93,6 +96,7 @@ export default function App() {
   //   fetchData();
   // },[]);
 
+  // Container for different app pages
     return (
         <NavigationContainer>
             <Stack.Navigator>
