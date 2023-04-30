@@ -24,6 +24,7 @@ const SummaryPage = ({ route, navigation }) => {
     const scrollViewRef = useRef();
     const lang = route.params.lang;
     const summ = route.params?.summary;
+    const imgText = route.params?.fullTextString;
 
     const handleContentSizeChange = () => {
         scrollViewRef.current.scrollToEnd({ animated: true });
@@ -86,7 +87,7 @@ const SummaryPage = ({ route, navigation }) => {
                 model: "gpt-4",
                 max_tokens: 128,
                 
-                messages: [{ role: "system", content: "you are responding the the following summary gave:"+summ},{ role: "user", content: prompt+". Please respond in the "+lang+" language" },],
+                messages: [{ role: "system", content: "you are responding to the following summary gave:"+summ+" The summary is based on the following text:"+imgText},{ role: "user", content: prompt+". Please respond in the "+lang+" language" },],
                 temperature: 1,
                 n: 1,
                 stop: '\n'
