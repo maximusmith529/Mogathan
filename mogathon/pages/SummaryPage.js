@@ -22,6 +22,12 @@ const SummaryPage = ({ route, navigation }) =>
 {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const scrollViewRef = useRef();
+
+    const handleContentSizeChange = () => {
+        scrollViewRef.current.scrollToEnd({ animated: true });
+    };
+
     let summary = route.params?.summary;
     useEffect(() =>
     {
@@ -65,9 +71,14 @@ const SummaryPage = ({ route, navigation }) =>
                     <Image style={styles.backBtnImage} source={require('../assets/back-btn.png')} />
                 </TouchableOpacity>
             </View>
-            <View style={styles.chatContainer}>
-                {messages.map(renderMessage)}
-            </View>
+            <ScrollView
+                ref={scrollViewRef}
+                style={styles.scrollView}
+                onContentSizeChange={handleContentSizeChange}>
+                <View style={styles.chatContainer}>
+                    {messages.map(renderMessage)}
+                </View>
+            </ScrollView>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.textInput}
@@ -79,6 +90,7 @@ const SummaryPage = ({ route, navigation }) =>
                     <Text style={styles.sendButtonText}>Send</Text>
                 </TouchableOpacity>
             </View>
+
         </KeyboardAvoidingView>
     );
 };
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 10,
         paddingVertical: 5,
-        
+
     },
     textInput: {
         flex: 1,

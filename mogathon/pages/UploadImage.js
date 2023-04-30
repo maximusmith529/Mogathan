@@ -32,6 +32,21 @@ export default function UploadImage({ route, navigation }) {
     const { width } = Dimensions.get('window');
     const itemWidth = width;
 
+    const spinAnim = useRef(new Animated.Value(0)).current;
+
+    Animated.loop(
+        Animated.timing(spinAnim, {
+            toValue: 4,
+            duration: 10000,
+            useNativeDriver: true,
+        })
+    ).start();
+
+    const spin = spinAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg'],
+    });
+
     const renderItem = ({ item, index }) => {
         return (
             <View style={{ flex: 1, width: itemWidth }}>
@@ -146,7 +161,14 @@ export default function UploadImage({ route, navigation }) {
         setSelectedIndex(index);
     };
     if (nextPressed) {
-        return (<View style={styles.container}><Text>Loading...</Text></View>);
+        return (
+            <View style={styles.container}>
+                <Animated.Image
+                    style={[styles.loadingImg, { transform: [{ rotate: spin }] }]}
+                    source={require('../assets/loading-icon.png')}
+                />
+            </View>
+        );
     }
     return (
         <View style={styles.container}>
@@ -300,4 +322,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         backgroundColor: '#254f94'
     },
+    loadingImg: {
+        alignSelf: 'center',
+        width: 100,
+        height: 100,
+        marginBottom: 20
+    }
 });
