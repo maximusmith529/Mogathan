@@ -99,7 +99,7 @@ export default function UploadImage({ route, navigation }) {
             setImages(newImages);
         }
     }
-	// Gives functionality to nect button, navigating forward after uploading images
+	// Gives functionality to next button, navigating forward after uploading images
     const handleNextButton = async () => {
         setNextPressed(true);
         let fullString = "";

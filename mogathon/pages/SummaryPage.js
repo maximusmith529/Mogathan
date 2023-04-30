@@ -1,25 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useRef, useState, useEffect } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    ScrollView,
-    Image,
-    TextInput,
-    Pressable,
-    TouchableOpacity,
-    ImageBackground,
-    Dimensions,
-    Animated,
-    KeyboardAvoidingView,
-    Platform,
-} from 'react-native';
+import
+    {
+        StyleSheet,
+        Text,
+        View,
+        ScrollView,
+        Image,
+        TextInput,
+        Pressable,
+        TouchableOpacity,
+        ImageBackground,
+        Dimensions,
+        Animated,
+        KeyboardAvoidingView,
+        Platform,
+    } from 'react-native';
 // SummaryPage.js
 import Constants from 'expo-constants';
 
 // Send text to GPT and receives summary
-const SummaryPage = ({ route, navigation }) => {
+const SummaryPage = ({ route, navigation }) =>
+{
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const scrollViewRef = useRef();
@@ -27,7 +29,8 @@ const SummaryPage = ({ route, navigation }) => {
     const summ = route.params?.summary;
     const imgText = route.params?.fullTextString;
 
-    const handleContentSizeChange = () => {
+    const handleContentSizeChange = () =>
+    {
         scrollViewRef.current.scrollToEnd({ animated: true });
     };
 
@@ -39,25 +42,27 @@ const SummaryPage = ({ route, navigation }) => {
         }
     }, [summ]);
 
-	// Handles sending of messages from user to GPT
-  const handleSend = async() => {
-    if (newMessage.trim() !== '') {
-      let n = newMessage;
-      let newList = messages;
-      newList.push({ text: n, sender: 'user' });
-      setMessages(newList);
-      setNewMessage('');
-      let response = await GPTPrompt(n);
-      newList.push({ text: response, sender: 'bot' });
-      setMessages(newList);
-      console.log(messages);
-      setNewMessage(' ');
-      setNewMessage('');
-    }
-  };
+    // Handles sending of messages from user to GPT
+    const handleSend = async () =>
+    {
+        if (newMessage.trim() !== '')
+        {
+            let n = newMessage;
+            let newList = messages;
+            newList.push({ text: n, sender: 'user' });
+            setMessages(newList);
+            setNewMessage('');
+            let response = await GPTPrompt(n);
+            newList.push({ text: response, sender: 'bot' });
+            setMessages(newList);
+            console.log(messages);
+            setNewMessage(' ');
+            setNewMessage('');
+        }
+    };
 
-  // Renders user messages sent to GPT
-  const renderMessage = (message, index) =>
+    // Renders user messages sent to GPT
+    const renderMessage = (message, index) =>
     {
         const isUser = message.sender === 'user';
         const messageStyle = isUser ? styles.userMessage : styles.botMessage;
@@ -72,9 +77,10 @@ const SummaryPage = ({ route, navigation }) => {
         );
     };
 
-    
-	// Prompts GPT to respond to user's prompt
-    const GPTPrompt = async (prompt) => {
+
+    // Prompts GPT to respond to user's prompt
+    const GPTPrompt = async (prompt) =>
+    {
         const API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
         const API_KEY = Constants?.manifest?.extra?.openAiKey
 
@@ -89,8 +95,8 @@ const SummaryPage = ({ route, navigation }) => {
             body: JSON.stringify({
                 model: "gpt-4",
                 max_tokens: 128,
-                
-                messages: [{ role: "system", content: "you are responding to the following summary gave:"+summ+" The summary is based on the following text:"+imgText},{ role: "user", content: prompt+". Please respond in the "+lang+" language" },],
+
+                messages: [{ role: "system", content: "you are responding to the following summary gave:" + summ + " The summary is based on the following text:" + imgText }, { role: "user", content: prompt + ". Please respond in the " + lang + " language" },],
                 temperature: 1,
                 n: 1,
                 stop: '\n'
@@ -102,7 +108,7 @@ const SummaryPage = ({ route, navigation }) => {
         return data.choices[0].message.content;
     }
 
-	// Renders page containing summary and messages in addition to navigatory buttons
+    // Renders page containing summary and messages in addition to navigatory buttons
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -142,7 +148,7 @@ export default SummaryPage;
 
 // Styling for page components
 const styles = StyleSheet.create({
-	container: {
+    container: {
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
@@ -177,7 +183,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
 
-	body: {
+    body: {
         display: 'flex',
         flexDirection: 'row',
         height: '80%',
@@ -206,38 +212,38 @@ const styles = StyleSheet.create({
     chatContainer: {
         flex: 1,
         paddingHorizontal: 10,
-      },
-      messageContainer: {
+    },
+    messageContainer: {
         marginVertical: 5,
-      },
-      messageBubble: {
+    },
+    messageBubble: {
         borderRadius: 20,
         paddingVertical: 10,
         paddingHorizontal: 15,
         maxWidth: '80%',
-      },
-      userMessage: {
+    },
+    userMessage: {
         backgroundColor: '#2196F3',
         alignSelf: 'flex-end',
-      },
-      botMessage: {
+    },
+    botMessage: {
         backgroundColor: '#fffcd1',
         alignSelf: 'flex-start',
-      },
-      userMessageText: {
+    },
+    userMessageText: {
         color: '#FFFFFF',
         fontSize: 16,
-      },
-      botMessageText: {
+    },
+    botMessageText: {
         color: '#000000',
         fontSize: 16,
-      },
-      inputContainer: {
+    },
+    inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,
-      },
-      textInput: {
+    },
+    textInput: {
         flex: 1,
         height: 40,
         borderRadius: 20,
@@ -247,5 +253,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 10,
         backgroundColor: 'white'
-      },
-    });
+    },
+});
