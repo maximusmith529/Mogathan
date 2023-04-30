@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'grey'
+        backgroundColor: '#e0f2fe'
     },
     header: {
         flexDirection: 'row',
@@ -168,4 +168,49 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-});
+    chatContainer: {
+        flex: 1,
+        paddingHorizontal: 10,
+      },
+      messageContainer: {
+        marginVertical: 5,
+      },
+      messageBubble: {
+        borderRadius: 20,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        maxWidth: '80%',
+      },
+      userMessage: {
+        backgroundColor: '#2196F3',
+        alignSelf: 'flex-end',
+      },
+      botMessage: {
+        backgroundColor: '#F5F5F5',
+        alignSelf: 'flex-start',
+      },
+      userMessageText: {
+        color: '#FFFFFF',
+        fontSize: 16,
+      },
+      botMessageText: {
+        color: '#000000',
+        fontSize: 16,
+      },
+      inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+      },
+      textInput: {
+        flex: 1,
+        height: 40,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#C1C1C1',
+        paddingHorizontal: 20,
+        fontSize: 16,
+        marginRight: 10,
+        backgroundColor: 'white'
+      },
+    });
