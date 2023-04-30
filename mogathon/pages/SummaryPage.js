@@ -31,15 +31,14 @@ const SummaryPage = ({ route, navigation }) =>
         }
     }, [summary]);
 
-    const handleSend = () =>
-    {
-        if (newMessage.trim() !== '')
-        {
-            setMessages([...messages, { text: newMessage, sender: 'user' }]);
-            setNewMessage('');
-        }
-    };
-    const renderMessage = (message, index) =>
+  const handleSend = () => {
+    if (newMessage.trim() !== '') {
+      setMessages([...messages, { text: newMessage, sender: 'user' }]);
+      setNewMessage('');
+    }
+  };
+
+  const renderMessage = (message, index) =>
     {
         const isUser = message.sender === 'user';
         const messageStyle = isUser ? styles.userMessage : styles.botMessage;
@@ -47,12 +46,14 @@ const SummaryPage = ({ route, navigation }) =>
         return (
             <View key={index} style={[styles.messageContainer, { alignSelf: isUser ? 'flex-end' : 'flex-start' }]}>
                 <View style={[styles.messageBubble, messageStyle]}>
-                    <Text style={textStyle}>{message.text}</Text>
+                    <Text style={textStyle} selectable={true}>{message.text}</Text>
                 </View>
             </View>
         );
     };
 
+  const lang = route.params.lang;
+  const summ = route.params.summary;
     return (
         <KeyboardAvoidingView
             style={styles.container}
